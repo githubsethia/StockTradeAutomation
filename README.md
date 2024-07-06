@@ -19,6 +19,9 @@ StockTradeAutomation is a project designed to automate the process of trading st
 - `pandas` library
 - `yfinance` library
 
+## Contact
+For any questions or feedback, please contact Anshul Chauhan at anshulc55@gmail.com.
+
 ### Installation
 
 1. Clone the repository:
@@ -31,9 +34,3 @@ StockTradeAutomation is a project designed to automate the process of trading st
 
  ```sh
 pip install pandas finance
-
-
-### Contact
-For any questions or feedback, please contact Anshul Chauhan at anshulc55@gmail.com.
-
-
