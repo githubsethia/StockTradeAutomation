@@ -32,7 +32,8 @@ StockTradeAutomation is a project designed to automate the process of trading st
  ```sh
 pip install pandas finance
 
-**### Contact**
+
+### Contact
 For any questions or feedback, please contact Anshul Chauhan at anshulc55@gmail.com.
 
 
