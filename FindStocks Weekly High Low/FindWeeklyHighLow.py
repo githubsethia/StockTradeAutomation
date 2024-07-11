@@ -2,7 +2,7 @@ import pandas as pd
 import yfinance as yf
 
 # List of ticker symbols
-tickers = ["SBICARD.NS", "ZEEL.NS", "HDFCLIFE.NS", "BERGEPAINT.NS"]  # Add more ticker symbols as needed
+tickers = ["SBICARD.NS", "ZEEL.NS", "HDFCLIFE.NS", "BERGEPAINT.NS", "TATATECH.NS"]  # Add more ticker symbols as needed
 
 # Dictionary to store weekly high and low prices for each ticker
 weekly_data_dict = {}
