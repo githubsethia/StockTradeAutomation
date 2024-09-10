@@ -20,7 +20,7 @@ StockTradeAutomation is a project designed to automate the process of trading st
 - `yfinance` library
 
 ## Contact
-For any questions or feedback, please contact Anshul Chauhan at anshulc55@gmail.com.
+For any questions or feedback, please contact Anshul Chauhan at WealthBuilder.nifty@gmail.com.
 
 ### Installation
 
