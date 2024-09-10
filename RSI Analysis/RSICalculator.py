@@ -57,8 +57,8 @@ def print_stock_info(stock_info):
 
 # List of stock symbols to analyze
 stock_symbols = ["RKSWAMY.NS", "TTML.NS", "ZEEL.NS", "RALLIS.NS", "M&MFIN.NS", "HAVELLS.NS", "AXISBANK.NS",
-                 "SBIN.NS", "ADANIPOWER.NS", "IRCTC.NS", "NMDC.NS", "UNIONBANK.NS", "ASHIANA.NS", "BMW.NS",
-                 "BAJIJFINSV.NS", "MEDPLUS.NS", "PVSL.NS", "TITAN.NS", "YATHARTH.NS"]
+                 "SBIN.NS", "ADANIPOWER.NS", "IRCTC.NS", "NMDC.NS", "UNIONBANK.NS", "ASHIANA.NS", "BMW.BS",
+                 "BAJAJFINSV.NS", "MEDPLUS.NS", "PVSL.NS", "TITAN.NS", "YATHARTH.NS"]
 
 # Fetch stock data and calculate RSI
 stock_info = fetch_stock_data(stock_symbols)
