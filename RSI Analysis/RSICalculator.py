@@ -66,8 +66,8 @@ def print_stock_info(sorted_stock_info):
 
 # Stock tickers to fetch data for
 tickers = ["RKSWAMY.NS", "TTML.NS", "ZEEL.NS", "RALLIS.NS", "M&MFIN.NS", "HAVELLS.NS", "AXISBANK.NS",
-                 "SBIN.NS", "ADANIPOWER.NS", "IRCTC.NS", "NMDC.NS", "UNIONBANK.NS", "ASHIANA.NS", 
-                 "BAJAJFINSV.NS", "MEDPLUS.NS", "PVSL.NS", "TITAN.NS", "YATHARTH.NS"]  # Example with an invalid ticker
+           "SBIN.NS", "ADANIPOWER.NS", "IRCTC.NS", "NMDC.NS", "UNIONBANK.NS", "ASHIANA.NS",
+           "BAJAJFINSV.NS", "MEDPLUS.NS", "PVSL.NS", "TITAN.NS", "YATHARTH.NS"]
 
 # Fetch and sort data by RSI in ascending order
 sorted_stock_info = get_stock_info(tickers)

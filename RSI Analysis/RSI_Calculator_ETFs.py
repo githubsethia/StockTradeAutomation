@@ -56,7 +56,7 @@ def print_stock_info(stock_info):
     print(df_sorted.to_string(index=False, float_format="%.2f"))
 
 # List of stock symbols to analyze
-stock_symbols = [    'GROWEV.NS', 'MIDCAPETF.NS', 'MON100.NS', 'ALPL30IETF.NS', 'GOLDBEES.NS', 
+stock_symbols = ['GROWEV.NS', 'MIDCAPETF.NS', 'MON100.NS', 'ALPL30IETF.NS', 'GOLDBEES.NS', 
     'TATSILV.NS', 'ALPHAETF.NS', 'ALPHA.NS', 'ITIETF.NS', 'SETFGOLD.NS', 
     'BANKBEES.NS', 'MOM30IETF.NS', 'SILVERBEES.NS', 'MIDCAPIETF.NS', 
      'NIFTYETF.NS', 'NIFTYIETF.NS', 'SILVERETF.NS', 'GOLD1.NS', 
