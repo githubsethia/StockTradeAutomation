@@ -20,7 +20,7 @@ def fetch_stock_data(stock_symbols):
 
     for symbol in stock_symbols:
         # Fetch stock data for the past 30 days
-        stock_data = yf.download(symbol, period="1mo", interval="1d")
+        stock_data = yf.download(symbol, period="3mo", interval="1d")
         
         if not stock_data.empty:
             # Calculate RSI for the stock

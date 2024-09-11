@@ -1,67 +1,76 @@
 import yfinance as yf
 import pandas as pd
 
-def calculate_rsi(data, window=14):
-    """
-    Calculate Relative Strength Index (RSI) for a given stock data.
-    """
-    delta = data['Close'].diff()
-    gain = (delta.where(delta > 0, 0)).rolling(window=window).mean()
-    loss = (-delta.where(delta < 0, 0)).rolling(window=window).mean()
-    rs = gain / loss
+def calculate_rsi(data, period=28):
+    """Calculate RSI using Exponential Moving Average for gains and losses."""
+    delta = data['Close'].diff(1)
+    
+    gain = delta.where(delta > 0, 0)
+    loss = -delta.where(delta < 0, 0)
+    
+    # Calculate the Exponential Moving Average for gains and losses
+    avg_gain = gain.ewm(span=period, adjust=False).mean()
+    avg_loss = loss.ewm(span=period, adjust=False).mean()
+
+    rs = avg_gain / avg_loss
     rsi = 100 - (100 / (1 + rs))
     return rsi
 
-def fetch_stock_data(stock_symbols):
-    """
-    Fetch data for given stock symbols and calculate RSI.
-    """
-    stock_info = []
+def fetch_stock_data(ticker):
+    """Fetch historical data for a stock and calculate RSI."""
+    try:
+        stock = yf.Ticker(ticker)
+        data = stock.history(period="3mo")  # Fetch last 30 days for RSI calculation
+        data['RSI'] = calculate_rsi(data)
+        return data
+    except Exception as e:
+        print(f"Error fetching data for {ticker}: {e}")
+        return None
 
-    for symbol in stock_symbols:
-        # Fetch stock data for the past 30 days
-        stock_data = yf.download(symbol, period="1mo", interval="1d")
-        
-        if not stock_data.empty:
-            # Calculate RSI for the stock
-            stock_data['RSI'] = calculate_rsi(stock_data)
+def get_stock_info(tickers):
+    """Fetch data for each stock and collect today's High, Low, Close, and RSI."""
+    stock_info_list = []
 
-            # Get today's high, low, and current price (last close price)
-            today_high = stock_data['High'].iloc[-1]   # Use .iloc[-1] to access the last row
-            today_low = stock_data['Low'].iloc[-1]     # Use .iloc[-1] to access the last row
-            current_price = stock_data['Close'].iloc[-1]  # Use .iloc[-1] to access the last row
-            rsi_today = stock_data['RSI'].iloc[-1]     # Use .iloc[-1] to access the last row
+    for ticker in tickers:
+        data = fetch_stock_data(ticker)
+        if data is not None and not data.empty:
+            try:
+                today_data = data.iloc[-1]  # Get the most recent day data
+                current_price = today_data['Close']
+                today_high = today_data['High']
+                today_low = today_data['Low']
+                today_rsi = today_data['RSI']
+                
+                # Append stock information as a dictionary
+                stock_info_list.append({
+                    'Stock': ticker,
+                    'Today High': today_high,
+                    'Current Price': current_price,
+                    'Today Low': today_low,
+                    'RSI': today_rsi
+                })
+            except Exception as e:
+                print(f"Error processing data for {ticker}: {e}")
 
-            # Append the data to the list as a dictionary
-            stock_info.append({
-                "Stock": symbol,
-                "Today High": today_high,
-                "Current Price": current_price,
-                "Today Low": today_low,
-                "RSI": rsi_today
-            })
-    
-    return stock_info
+    # Sort the list by RSI in ascending order
+    sorted_stock_info = sorted(stock_info_list, key=lambda x: x['RSI'])
+    return sorted_stock_info
 
-def print_stock_info(stock_info):
-    """
-    Print the stock information including RSI, High, Current Price, and Low in tabular format,
-    sorted by the lowest RSI in ascending order.
-    """
-    # Convert the stock information to a DataFrame
-    df = pd.DataFrame(stock_info)
-    # Sort the DataFrame by the 'RSI' column in ascending order
-    df_sorted = df.sort_values(by="RSI", ascending=True)
-    # Display the sorted DataFrame in a tabular format
-    print(df_sorted.to_string(index=False, float_format="%.2f"))
+def print_stock_info(sorted_stock_info):
+    """Print stock data in table format."""
+    print(f"{'Stock':<12} {'Today High':<12} {'Current Price':<15} {'Today Low':<12} {'RSI':<6}")
+    print("-" * 60)
 
-# List of stock symbols to analyze
-stock_symbols = ["RKSWAMY.NS", "TTML.NS", "ZEEL.NS", "RALLIS.NS", "M&MFIN.NS", "HAVELLS.NS", "AXISBANK.NS",
-                 "SBIN.NS", "ADANIPOWER.NS", "IRCTC.NS", "NMDC.NS", "UNIONBANK.NS", "ASHIANA.NS", "BMW.BS",
-                 "BAJAJFINSV.NS", "MEDPLUS.NS", "PVSL.NS", "TITAN.NS", "YATHARTH.NS"]
+    for stock in sorted_stock_info:
+        print(f"{stock['Stock']:<12} {stock['Today High']:<12.2f} {stock['Current Price']:<15.2f} {stock['Today Low']:<12.2f} {stock['RSI']:<6.2f}")
 
-# Fetch stock data and calculate RSI
-stock_info = fetch_stock_data(stock_symbols)
+# Stock tickers to fetch data for
+tickers = ["RKSWAMY.NS", "TTML.NS", "ZEEL.NS", "RALLIS.NS", "M&MFIN.NS", "HAVELLS.NS", "AXISBANK.NS",
+                 "SBIN.NS", "ADANIPOWER.NS", "IRCTC.NS", "NMDC.NS", "UNIONBANK.NS", "ASHIANA.NS", 
+                 "BAJAJFINSV.NS", "MEDPLUS.NS", "PVSL.NS", "TITAN.NS", "YATHARTH.NS"]  # Example with an invalid ticker
 
-# Print the fetched stock information in tabular format, sorted by RSI
-print_stock_info(stock_info)
+# Fetch and sort data by RSI in ascending order
+sorted_stock_info = get_stock_info(tickers)
+
+# Print the sorted data in table format
+print_stock_info(sorted_stock_info)
