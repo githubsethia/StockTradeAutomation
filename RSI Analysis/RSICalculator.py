@@ -65,9 +65,9 @@ def print_stock_info(sorted_stock_info):
         print(f"{stock['Stock']:<12} {stock['Today High']:<12.2f} {stock['Current Price']:<15.2f} {stock['Today Low']:<12.2f} {stock['RSI']:<6.2f}")
 
 # Stock tickers to fetch data for
-tickers = ["RKSWAMY.NS", "TTML.NS", "ZEEL.NS", "RALLIS.NS", "M&MFIN.NS", "HAVELLS.NS", "AXISBANK.NS",
-           "SBIN.NS", "ADANIPOWER.NS", "IRCTC.NS", "NMDC.NS", "UNIONBANK.NS", "ASHIANA.NS",
-           "BAJAJFINSV.NS", "MEDPLUS.NS", "PVSL.NS", "TITAN.NS", "YATHARTH.NS"]
+tickers = ['ZEEL.NS', 'TTML.NS', 'BMW.NS', 'BAJAJFINSV.NS', 'NMDC.NS', 'PVSL.NS', 'CHENNPETRO.NS', 
+           'AXISBANK.NS', 'SWANENERGY.NS', 'TITAN.NS', 'ADANIPOWER.NS', 'IRTCT.NS', 'MEDPLUS.NS',
+           'SBIN.NS', 'FDC.NS', 'EICHERMOT.NS']
 
 # Fetch and sort data by RSI in ascending order
 sorted_stock_info = get_stock_info(tickers)

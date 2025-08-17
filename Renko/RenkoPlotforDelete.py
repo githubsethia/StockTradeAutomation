@@ -4,8 +4,9 @@ import mplfinance as mpf
 from datetime import datetime, timedelta
 
 # List of stock tickers
-tickers = ['APOLLOHOSP.NS', 'ADANIPOWER.NS', 'IRCTC.NS', 'ADANIENSOL.NS', 'NMDC.NS', 'INDIANB.NS', 'UNIONBANK.NS', 'COALINDIA.NS',
-    'ASIANPAINT.NS', 'SBIN.NS', 'TATAMOTORS.NS']
+tickers = ['ZEEL.NS', 'TTML.NS', 'BMW.NS', 'BAJAJFINSERVE.NS', 'NMDC.NS', 'PVSL.NS', 'CHENNPETRO.NS', 
+           'AXISBANK.NS', 'SWANENERGY.NS', 'TITAN.NS', 'ADANIPOWER.NS', 'IRTCT.NS', 'MEDPLUS.NS',
+           'SBIN.NS', 'FDC.NS', 'EICHERMOT.NS']
 
 # Function to calculate Renko brick size
 def calculate_brick_size(current_price):
