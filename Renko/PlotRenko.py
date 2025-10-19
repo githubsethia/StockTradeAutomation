@@ -37,6 +37,8 @@ stock_symbols = [
     "SRF.NS", "CANBK.NS", "INDUSTOWER.NS", "IDBI.NS", "INDIANB.NS", "GMRINFRA.NS", "IDEA.NS"
 ]
 
+# stock_symbols = [
+#     "FLUOROCHEM.NS"]
 
 tickers = [symbol.strip() for symbol in stock_symbols]
 # Function to calculate Renko brick size
@@ -52,9 +54,13 @@ print(len(tickers))
 # Fetch historical data and plot Renko chart for each stock
 for ticker in tickers:
     # Fetch historical stock data
-    data = yf.download(ticker, start=start_date, end=end_date, progress=False)
+    data = yf.download(ticker, start=start_date, end=end_date, progress=True,auto_adjust=True,multi_level_index=False)
     
     # Ensure the DataFrame has no missing values
+    if data is None or data.empty:
+        print(f"{ticker}: No data was available")
+        continue
+
     data.dropna(inplace=True)
     
     # Calculate the traditional Renko brick size (1% of the current stock price)
